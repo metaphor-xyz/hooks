@@ -1,4 +1,5 @@
 import { ThreeIdConnect, EthereumAuthProvider } from '@3id/connect';
+import ThreeIdResolver from '@ceramicnetwork/3id-did-resolver';
 import { CeramicApi } from '@ceramicnetwork/common';
 import { CeramicClient } from '@ceramicnetwork/http-client';
 import { DID } from 'dids';
@@ -6,10 +7,6 @@ import KeyDidResolver from 'key-did-resolver';
 import React, { useRef, useEffect, createContext, useContext } from 'react';
 
 import { useWalletManager } from './WalletManagerProvider';
-
-const didResolver = {
-  ...KeyDidResolver.getResolver(),
-};
 
 export interface Props {
   apiUrl: string;
@@ -27,10 +24,15 @@ export default function CeramicProvider({ apiUrl, children }: React.PropsWithChi
 
   useEffect(() => {
     if (connected && provider && mainAccount) {
+      const didResolver = {
+        ...KeyDidResolver.getResolver(),
+        ...ThreeIdResolver.getResolver(client.current),
+      };
+
       client.current.did = new DID({ resolver: didResolver });
 
       const threeIdConnect = new ThreeIdConnect();
-      const authProvider = new EthereumAuthProvider(provider, mainAccount);
+      const authProvider = new EthereumAuthProvider(provider.provider, mainAccount);
       threeIdConnect
         .connect(authProvider)
         .then(() => threeIdConnect.getDidProvider())

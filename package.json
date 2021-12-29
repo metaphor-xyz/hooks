@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "@3id/connect": "^0.2.5",
+    "@ceramicnetwork/3id-did-resolver": "^1.4.12",
     "@ceramicnetwork/common": "^1.10.1",
     "@ceramicnetwork/http-client": "^1.5.3",
     "@stablelib/random": "^1.0.1",
