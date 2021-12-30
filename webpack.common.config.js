@@ -3,18 +3,11 @@ module.exports = {
 		extensions: ['.ts', '.tsx', '.js', '.jsx']
 	},
 	module: {
-		rules: [{
+    rules: [
+      {
 				test: /\.(js|mjs|jsx|ts|tsx)$/,
 				exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
-            },
-          },
-          'ts-loader',
-        ],
+        use: 'ts-loader',
 			},
 		]
 	},
