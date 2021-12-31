@@ -12,7 +12,6 @@
   "scripts": {
     "build": "tsc",
     "prepublish": "npm run build",
-    "check": "npm run lint",
     "lint": "eslint \"src/**/*.{ts,tsx,js,jsx}\"",
     "fix": "eslint --fix \"src/**/*.{ts,tsx,js,jsx}\"",
     "prepare": "husky install",
